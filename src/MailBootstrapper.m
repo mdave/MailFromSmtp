@@ -18,6 +18,7 @@
 
 #import "MailBootstrapper.h"
 #import "HeadersEditor+Extensions.h"
+#import "Swizzler.h"
 
 @implementation MailBootstrapper
 
@@ -27,8 +28,8 @@
 + (void)load
 {
     // Extend HeadersEditor with custom methods.
-    [MSF_Swizzler extendClass: @"HeadersEditor"
-                    withClass: @"MSF_HeadersEditor"];
+    [Swizzler extendClass: @"HeadersEditor"
+                withClass: @"MSF_HeadersEditor"];
 }
 
 /**

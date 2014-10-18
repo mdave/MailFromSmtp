@@ -52,7 +52,7 @@
     {
         // Get dictionary of account information. This is the same as stored in
         // ~/Library/Mail/V2/MailData/Accounts.plist
-        NSDictionary *dict = [obj valueForKey:@"_info"];
+        NSDictionary *dict = [account valueForKey:@"_info"];
 
         // Use the CanonicalEmailAddress field to compare against email
         // address in the From field.
@@ -61,7 +61,7 @@
         // We found a match.
         if ([email isEqualToString:emailFrom])
         {
-            return obj;
+            return account;
         }
     }
 
