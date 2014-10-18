@@ -6,9 +6,22 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5574248C19F2C02300050941 /* HeadersEditor+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5574248719F2C02300050941 /* HeadersEditor+Extensions.m */; };
+		5574248D19F2C02300050941 /* MailBootstrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5574248919F2C02300050941 /* MailBootstrapper.m */; };
+		5574248E19F2C02300050941 /* Swizzler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5574248B19F2C02300050941 /* Swizzler.m */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
-		5574247919F2BF7900050941 /* MailFromSmtp.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MailFromSmtp.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		5574247D19F2BF7900050941 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5574247919F2BF7900050941 /* MailFromSmtp.mailbundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MailFromSmtp.mailbundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		5574248319F2C01100050941 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = resources/Info.plist; sourceTree = SOURCE_ROOT; };
+		5574248619F2C02300050941 /* HeadersEditor+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "HeadersEditor+Extensions.h"; path = "src/HeadersEditor+Extensions.h"; sourceTree = SOURCE_ROOT; };
+		5574248719F2C02300050941 /* HeadersEditor+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "HeadersEditor+Extensions.m"; path = "src/HeadersEditor+Extensions.m"; sourceTree = SOURCE_ROOT; };
+		5574248819F2C02300050941 /* MailBootstrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MailBootstrapper.h; path = src/MailBootstrapper.h; sourceTree = SOURCE_ROOT; };
+		5574248919F2C02300050941 /* MailBootstrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MailBootstrapper.m; path = src/MailBootstrapper.m; sourceTree = SOURCE_ROOT; };
+		5574248A19F2C02300050941 /* Swizzler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Swizzler.h; path = src/Swizzler.h; sourceTree = SOURCE_ROOT; };
+		5574248B19F2C02300050941 /* Swizzler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Swizzler.m; path = src/Swizzler.m; sourceTree = SOURCE_ROOT; };
+		5574248F19F2C0B600050941 /* MailFromSmtp.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MailFromSmtp.pch; path = src/MailFromSmtp.pch; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,7 +46,7 @@
 		5574247A19F2BF7900050941 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5574247919F2BF7900050941 /* MailFromSmtp.bundle */,
+				5574247919F2BF7900050941 /* MailFromSmtp.mailbundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -41,6 +54,7 @@
 		5574247B19F2BF7900050941 /* MailFromSmtp */ = {
 			isa = PBXGroup;
 			children = (
+				5574248519F2C01800050941 /* Sources */,
 				5574247C19F2BF7900050941 /* Supporting Files */,
 			);
 			path = MailFromSmtp;
@@ -49,9 +63,23 @@
 		5574247C19F2BF7900050941 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				5574247D19F2BF7900050941 /* Info.plist */,
+				5574248319F2C01100050941 /* Info.plist */,
+				5574248F19F2C0B600050941 /* MailFromSmtp.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5574248519F2C01800050941 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				5574248619F2C02300050941 /* HeadersEditor+Extensions.h */,
+				5574248719F2C02300050941 /* HeadersEditor+Extensions.m */,
+				5574248819F2C02300050941 /* MailBootstrapper.h */,
+				5574248919F2C02300050941 /* MailBootstrapper.m */,
+				5574248A19F2C02300050941 /* Swizzler.h */,
+				5574248B19F2C02300050941 /* Swizzler.m */,
+			);
+			name = Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,7 +99,7 @@
 			);
 			name = MailFromSmtp;
 			productName = MailFromSmtp;
-			productReference = 5574247919F2BF7900050941 /* MailFromSmtp.bundle */;
+			productReference = 5574247919F2BF7900050941 /* MailFromSmtp.mailbundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -120,6 +148,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5574248C19F2C02300050941 /* HeadersEditor+Extensions.m in Sources */,
+				5574248D19F2C02300050941 /* MailBootstrapper.m in Sources */,
+				5574248E19F2C02300050941 /* Swizzler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,11 +235,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = MailFromSmtp/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				GCC_PREFIX_HEADER = src/MailFromSmtp.pch;
+				INFOPLIST_FILE = resources/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Mail/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
+				WRAPPER_EXTENSION = mailbundle;
 			};
 			name = Debug;
 		};
@@ -216,11 +248,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = MailFromSmtp/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				GCC_PREFIX_HEADER = src/MailFromSmtp.pch;
+				INFOPLIST_FILE = resources/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Mail/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
+				WRAPPER_EXTENSION = mailbundle;
 			};
 			name = Release;
 		};
@@ -243,6 +276,7 @@
 				5574248219F2BF7900050941 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
