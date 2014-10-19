@@ -53,7 +53,10 @@ to modify the source.
 4. Locate `MailFromSmtp.mailbundle` by right clicking on the
    `MailFromSmtp.mailbundle` product and select _Show in Finder_.
 5. Create the directory `~/Library/Mail/Bundles` if it doesn't exist.
-5. Copy `MailFromSmtp.mailbundle` into `~/Library/Mail/Bundles`.
+6. Copy `MailFromSmtp.mailbundle` into `~/Library/Mail/Bundles`.
+7. Enable Mail bundles by issuing the command `defaults write com.apple.mail
+   EnableBundles 1` at a terminal.
+8. (Re)start Mail.
 
 ## License
 
