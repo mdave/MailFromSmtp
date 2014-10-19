@@ -44,6 +44,8 @@
 
             method_exchangeImplementations(class_getInstanceMethod(aClass, aSel),
                                            class_getInstanceMethod(aClass, bSel));
+            
+            NSLog(@"Swizzling %@", aStr);
         }
     }
     free(bMethods);

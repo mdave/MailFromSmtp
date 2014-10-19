@@ -90,21 +90,30 @@
 - (void) MSF_changeFromHeader:(id)arg1
 {
     [self MSF_changeFromHeader:arg1];
+    [self doAutoSignature:arg1];
+}
 
+- (void) testTimer:(NSTimer *)timer
+{
+    [self doAutoSignature:[timer userInfo]];
+}
+
+- (void) doAutoSignature:(id)fromField
+{
     // Obtain email address in a hacky way from the From field, as in the
     // previous method.
     NSString *last =
-        [[[[arg1 selectedItem] title] componentsSeparatedByString:@" "]
+        [[[[fromField selectedItem] title] componentsSeparatedByString:@" "]
             lastObject];
-
+    
     // Email address to search for. lazy++ for hardcoding
     if ([last isEqualToString:@"d.moxey@imperial.ac.uk"])
     {
         int i;
-
+        
         // NSPopUpButton containing signature list.
         NSPopUpButton *sigs = [self valueForKey:@"_signaturePopup"];
-
+        
         // Iterate over list, and match the one which corresponds to "Imperial"
         // in this case. (Again, I'm lazy, sorry).
         for (i = 0; i < [sigs numberOfItems]; ++i)
@@ -115,18 +124,33 @@
                 break;
             }
         }
-
+        
         // Found a match.
         if (i != [sigs numberOfItems])
         {
             // Update the signature menu
             [sigs selectItemAtIndex:i];
-
+            
             // Fire off a change of signature request to put it into the message
             // body.
             [self MSF_changeSignature:sigs];
         }
     }
+}
+
+- (void) MSF_configureButtonsAndPopUps
+{
+    [self MSF_configureButtonsAndPopUps];
+    
+    // When everything is loaded, set a timer for 0.2s and then call the
+    // doAutoSignature routine so that the signature is set after the text is
+    // rendered, otherwise we get our signature at the top of the message. There
+    // is probably a better way to do this but it seems to work.
+    [NSTimer scheduledTimerWithTimeInterval:0.2
+                                     target:self
+                                   selector:@selector(testTimer:)
+                                   userInfo:[self valueForKey:@"_fromPopup"]
+                                    repeats:NO];
 }
 
 @end

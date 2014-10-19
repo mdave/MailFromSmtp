@@ -32,5 +32,7 @@
 - (void) MSF_changeFromHeader:(id)arg1;
 /// Called when the "Signature" dropdown box is changed.
 - (void) MSF_changeSignature:(id)arg1;
+/// Called when the header is loaded to configure buttons and popups.
+- (void) MSF_configureButtonsAndPopUps;
 
 @end
