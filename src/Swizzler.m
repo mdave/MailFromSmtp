@@ -14,13 +14,6 @@
 
 @implementation Swizzler
 
-+ (void) setSuperclassOf: (NSString*) aStr toClass: (NSString*) bStr {
-    Class aClass = NSClassFromString(aStr);
-    Class bClass = NSClassFromString(bStr);
-
-    class_setSuperclass(aClass, bClass);
-}
-
 + (void) extendClass: (NSString*) aStr withClass: (NSString*) bStr {
     Class aClass = NSClassFromString(aStr);
     Class bClass = NSClassFromString(bStr);
