@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5574247819F2BF7900050941"
-               BuildableName = "MailFromSmtp.bundle"
+               BuildableName = "MailFromSmtp.mailbundle"
                BlueprintName = "MailFromSmtp"
                ReferencedContainer = "container:MailFromSmtp.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5574247819F2BF7900050941"
-            BuildableName = "MailFromSmtp.bundle"
+            BuildableName = "MailFromSmtp.mailbundle"
             BlueprintName = "MailFromSmtp"
             ReferencedContainer = "container:MailFromSmtp.xcodeproj">
          </BuildableReference>
@@ -61,7 +61,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5574247819F2BF7900050941"
-            BuildableName = "MailFromSmtp.bundle"
+            BuildableName = "MailFromSmtp.mailbundle"
             BlueprintName = "MailFromSmtp"
             ReferencedContainer = "container:MailFromSmtp.xcodeproj">
          </BuildableReference>
