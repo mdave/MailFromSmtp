@@ -146,7 +146,7 @@
     // doAutoSignature routine so that the signature is set after the text is
     // rendered, otherwise we get our signature at the top of the message. There
     // is probably a better way to do this but it seems to work.
-    [NSTimer scheduledTimerWithTimeInterval:0.2
+    [NSTimer scheduledTimerWithTimeInterval:0.5
                                      target:self
                                    selector:@selector(testTimer:)
                                    userInfo:[self valueForKey:@"_fromPopup"]
