@@ -2,31 +2,43 @@
 
 ## What is this?
 
-In OS X 10.10 (Yosemite), Apple removed a very useful feature from their
-codebase: the ability to change which SMTP server you use from within the
-message editor. Since Apple is Apple, it seems unlikely they will re-add this
-feature. I therefore took it upon myself to code up a mailbundle which
-reimplements this, but in a "better" (and way more hacky) way.
+In OS X 10.10 (Yosemite), Apple removed a useful feature from their Mail.app
+client: the ability to change which SMTP server you use from within the message
+editor. After some communication with Apple via their bug tracker, they claim
+that such a feature is not useful/required and therefore will not be re-added in
+future versions of Mail.app.
 
-To give you background, I have a single IMAP account which aggregates all of my
-email. I therefore want the ability to send email from multiple addresses,
-depending on context. Mail allows you to define multiple outgoing identities, by
-defining them as a comma separated list in the Email Address field in the
-account information.
+Since Mail.app supports 'bundles', which can extend the functionality of the
+client (albeit in an unsupported manner), this project reimplements this
+functionality, using the SMTP servers that you have set up and an email address
+that is associated with each one. It is therefore 'better' in the sense that you
+don't have to select which email server you'd like to use -- MailFromSMTP will
+figure that out for itself.
 
-This causes a `From:` drop-down list to appear in the message composition
-editor. This mailbundle tries to identify an SMTP server to send outgoing email
-by comparing it against the `From:` address you selected.
+### Why would I want this?
 
-Please note that this was done in under 2 hours on a Friday evening, so the
-quality of code is quite bad.
+If you are not sure this is useful for you and your setup, this is mine: I have
+a single IMAP account which aggregates all of my email using fetchmail. I
+therefore want the ability to send email from multiple addresses, depending on
+context.
 
-## Automatic signature selection
+Mail.app allows you to define multiple outgoing identities, by defining them as
+a comma separated list in the Email Address field in the account
+information. This causes a `From:` drop-down list to appear in the message
+composition editor. 
 
-Because I use this for my personal email, this bundle includes another
-feature. When you change the `From:` field, it will try to match a signature and
-automatically put this into the mail body. For now, to use this feature you need
-to modify the source.
+MailFromSMTP tries to identify an SMTP server to send outgoing email by
+comparing it against the `From:` address you selected, and will automagically
+send via this server if it finds a match. If not, then it will use your default
+SMTP server.
+
+### Bonus feature -- automatic signature selection
+
+Because I use this for my personal email, this bundle includes another, rather
+unrelated feature. When you change the `From:` field, it will try to match a
+signature and automatically put this into the mail body. For now, to use this
+feature you need to modify the source, so I leave this as an exercise for the
+interested user.
 
 ## Requirements
 
@@ -36,12 +48,20 @@ to modify the source.
 ## Caveats
 
 1. Since this uses Mail's private API, it will almost certainly break at some
-   point in the future.
+   point in the future. However, I do plan on updating as new OS versions come
+   out.
 2. You need to have multiple email aliases set in your email account. To do
    this, define them as a comma separated list in the Email Address field in the
-   account information.
+   account information. See e.g. http://bit.ly/1hfR1DQ for instructions.
 3. Each SMTP account you have configured in your mail client should have a
-   `CanonicalEmailAddress` set in `~/Library/Mail/V2/MailData/Accounts.plist`.
+   `CanonicalEmailAddress` set in
+   `~/Library/Mail/V2/MailData/Accounts.plist`. To do this, open up this file in
+   e.g. TextEdit, find the `DeliveryAccounts` key, and for each email account,
+   make sure you have an entry such as
+   ```xml
+   <key>CanonicalEmailAddress</key>
+   <string>my@email.address</string>
+   ```
 4. I will probably not maintain this beyond my own personal use, although pull
    requests are highly encouraged.
 
