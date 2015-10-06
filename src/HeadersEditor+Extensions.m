@@ -31,14 +31,14 @@
     id ret = [self MSF_deliveryAccount];
 
     // The _deliveryASDS member variable is a AccountStatusDataSource object,
-    // which contains all the delivery accounts that we have set up.
+    // which contains all the delivery accounts that we have set up inside Mail.
     //
     // See e.g. http://bit.ly/10708mb for a full dump of what's needed.
     id deliveryASDS = [self valueForKey:@"_deliveryASDS"];
 
     // This is an array of all of delivery accounts.
     NSArray *accounts = [deliveryASDS valueForKey:@"_accounts"];
-
+    
     // The NSPopUpButton for the "From:" field
     NSPopUpButton *fromField = [self valueForKey:@"_fromPopup"];
 
@@ -48,20 +48,41 @@
         [[[[fromField selectedItem] title] componentsSeparatedByString:@" "]
             lastObject];
     
-    for (id account in accounts)
+    // Determine OS version: el Capitan removed [account _info] selector to grab
+    // details from plist.
+    NSOperatingSystemVersion osVersion =
+        [[NSProcessInfo processInfo] operatingSystemVersion];
+    
+    NSLog(@"found minorversion = %tu", osVersion.minorVersion);
+    
+    if (osVersion.minorVersion < 11)
     {
-        // Get dictionary of account information. This is the same as stored in
-        // ~/Library/Mail/V2/MailData/Accounts.plist
-        NSDictionary *dict = [account valueForKey:@"_info"];
-
-        // Use the CanonicalEmailAddress field to compare against email
-        // address in the From field.
-        NSString *email = [dict objectForKey:@"CanonicalEmailAddress"];
-
-        // We found a match.
-        if ([email isEqualToString:emailFrom])
+        for (id account in accounts)
         {
-            return account;
+            // Get dictionary of account information. This is the same as stored in
+            // ~/Library/Mail/V2/MailData/Accounts.plist
+            NSDictionary *dict = [account valueForKey:@"_info"];
+
+            // Use the CanonicalEmailAddress field to compare against email
+            // address in the From field.
+            NSString *email = [dict objectForKey:@"CanonicalEmailAddress"];
+
+            // We found a match.
+            if ([email isEqualToString:emailFrom])
+            {
+                return account;
+            }
+        }
+    }
+    else
+    {
+        for (id account in accounts)
+        {
+            NSString *email = [account valueForKey:@"canonicalEmailAddress"];
+            if ([email isEqualToString:emailFrom])
+            {
+                return account;
+            }
         }
     }
 
@@ -142,7 +163,7 @@
 {
     [self MSF_configureButtonsAndPopUps];
     
-    // When everything is loaded, set a timer for 0.2s and then call the
+    // When everything is loaded, set a timer for 0.5s and then call the
     // doAutoSignature routine so that the signature is set after the text is
     // rendered, otherwise we get our signature at the top of the message. There
     // is probably a better way to do this but it seems to work.
