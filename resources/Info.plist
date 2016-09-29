@@ -26,6 +26,15 @@
 		<string>AB695A2B-4605-4A74-A99F-AF9F9C92C41B</string>
 		<string># Mail v9.1 on OS X 10.11.1</string>
 		<string>DAF41AB7-F9AD-4273-9934-C81C74705B69</string>
+		<string># Mail v9.2 on OS X 10.11.2</string>
+		<string>1550C683-EA48-4036-B7CE-FB6F5D13EE02</string>
+		<string># Mail v9.3 on OS X 10.11.4</string>
+		<string>71562B89-0D90-4588-8E94-A75B701D6443</string>
+	</array>
+	<key>Supported10.12PluginCompatibilityUUIDs</key>
+	<array>
+		<string># Mail v10.0 on OS X 10.12</string>
+		<string>36CCB8BB-2207-455E-89BC-B9D6E47ABB5B</string>
 	</array>
 </dict>
 </plist>
