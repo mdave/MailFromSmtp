@@ -1,6 +1,67 @@
 # MailFromSmtp
 
-## What is this?
+**IMPORTANT NOTE:** MailFromSMTP is now _deprecated_ and will no longer be
+maintained. Here are some highlights as to why:
+
+- In macOS 10.12 (Sierra), Mail.app restructured the way that outgoing accounts
+  are assigned to the compose windows. This means that selecting the SMTP server
+  dynamically has now become much more challenging.
+- There is a more maintainable solution to this problem if you are running your
+  own mailserver, which is to use SMTP forwarding when emails are sent from
+  certain addresses (see below).
+- If you did happen to be using this plugin on macOS 10.10 or 10.11, then this
+  should continue to work fine.
+
+## Postfix-based solution
+
+If you are running `postfix`, then you can set up the
+`sender_dependent_default_transport_maps` option to define relays that will
+forward mail to remote servers based on the `From` header in your email. First,
+create a directory `/etc/postfix/header-relays` to keep configuration files
+related to this in (and also keep everything neat), then set up a hash
+`/etc/postfix/header-relays/sender_transport_map` which defines the email
+addresses that should be filtered:
+
+```
+email1@gmail.com          smtp1:[smtp.gmail.com]
+email2@otherserver.com    smtp2:[smtp.otherserver.com]
+```
+
+Then, run `postmap` on this file to generate a `.db` file, and enable this in
+your `main.cf` configuration with:
+
+```
+sender_dependent_default_transport_maps = hash:/etc/postfix/header-relays/sender_transport_map
+```
+
+Each SMTP relay requires a configuration with your authentication details. For
+example, my configuration file for `smtp1` lives in
+`/etc/postfix/header-relays/smtp1.relay` and looks like:
+
+```
+[smtp.gmail.com] email1@gmail.com:password
+```
+
+Again, you should run `postmap` on these files to generate the `.db`. Finally,
+you need to update your `master.cf` to define each transport `smtp?` that's
+defined in the sender transport map. For example, mine look like:
+
+```
+smtp1      unix  -       -       y       -       3       smtp
+    -o smtp_use_tls=yes
+    -o smtp_sasl_auth_enable=yes
+    -o smtp_sasl_security_options=noanonymous
+    -o smtp_sasl_password_maps=hash:/etc/postfix/header-relays/smtp1.relay
+```
+
+You can then restart postfix, and send an email with the appropriate `From:`
+header set using the addresses dropdown in Mail.app. If you monitor your logs,
+you should hopefully see that these email is forwarded to the appropriate SMTP
+relay.
+
+------
+
+## What is (was) this?
 
 In OS X 10.10 (Yosemite), Apple removed a useful feature from their Mail.app
 client: the ability to change which SMTP server you use from within the message
